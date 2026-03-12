@@ -3,6 +3,10 @@
 # https://snakemake.readthedocs.io/en/stable/snakefiles/best_practices.html,
 # in particular regarding the standardized folder structure mentioned there.
 
+from snakemake.utils import min_version
+
+min_version("6.10.0")
+
 
 # load configuration
 # -----------------------------------------------------
@@ -11,8 +15,35 @@ configfile: "config/config.yaml"
 
 # load rules
 # -----------------------------------------------------
-include: "rules/common.smk"
-include: "rules/process_reads.smk"
+# include: "rules/common.smk"
+# include: "rules/process_reads.smk"
+
+# declare https://github.com/b-brankovics/smkwf-oligo-screening as a module
+module smkwf_oligo_screening:
+    snakefile: 
+        github("b-brankovics/smkwf-oligo-screening", path="workflow/Snakefile", branch="setup")
+    config:
+        config
+
+
+# use all rules from https://github.com/b-brankovics/smkwf-oligo-screening
+use rule * from smkwf_oligo_screening exclude all
+
+
+rule straf_typing:
+    input:
+        tsv="results/{sample}/result.tsv",
+        STR="config/STR.tsv"
+    output:
+        parsed="results/{sample}/result.tsv"
+    # conda:
+    #     "envs/primers.yml"
+    log:
+        "logs/straf_typing/{sample}.log"
+    shell:
+        """
+        perl workflow/scripts/straf.pl {input.tsv} {input.yaml} > {output.parsed} 2> {log}
+        """
 
 
 # optional messages, log and error handling
@@ -33,5 +64,6 @@ onerror:
 # -----------------------------------------------------
 rule all:
     input:
-        "results/multiqc/multiqc_report.html",
+        expand("results/{sample}/result.tsv", sample=config["samples"]),
+        expand("results/{sample}/amplicons.fas", sample=config["samples"]),
     default_target: True
