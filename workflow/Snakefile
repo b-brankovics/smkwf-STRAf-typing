@@ -30,21 +30,33 @@ module smkwf_oligo_screening:
 use rule * from smkwf_oligo_screening exclude all
 
 
-rule straf_typing:
+# Add STR typing specific rules
+rule str_typing:
     input:
         tsv="results/{sample}/result.tsv",
         STR="config/STR.tsv"
     output:
-        parsed="results/{sample}/result.tsv"
+        "results/{sample}/str_repeats.tsv"
     # conda:
     #     "envs/primers.yml"
     log:
-        "logs/straf_typing/{sample}.log"
-    shell:
-        """
-        perl workflow/scripts/straf.pl {input.tsv} {input.yaml} > {output.parsed} 2> {log}
-        """
+        "logs/str_typing/{sample}.log"
+    script:
+        "scripts/str_count.py"
 
+
+rule str_overview:
+    input:
+        counts=expand("results/{sample}/str_repeats.tsv", sample=config["samples"])
+    output:
+        "results/str_overview.tsv",
+        "results/str_multi.tsv"
+    # conda:
+    #     "envs/primers.yml"
+    log:
+        "logs/str_overview.log"
+    script:
+        "scripts/str_overview.py"
 
 # optional messages, log and error handling
 # -----------------------------------------------------
@@ -66,4 +78,5 @@ rule all:
     input:
         expand("results/{sample}/result.tsv", sample=config["samples"]),
         expand("results/{sample}/amplicons.fas", sample=config["samples"]),
+        "results/str_overview.tsv"
     default_target: True
