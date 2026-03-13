@@ -23,7 +23,7 @@ If you use this workflow in a paper, don't forget to give credits to the authors
 
 ## Deployment options
 
-Prerequisites:
+**Prerequisites**:
 
 Snakemake needs to be installed and you need to be able to create conda environments.
 You can do this in the following way if you have conda available:
@@ -40,7 +40,7 @@ git clone git@github.com:b-brankovics/smkwf-STRAf-typing.git
 cd smkwf-STRAf-typing
 ```
 
-Setup your run:
+**Setup your run**:
 
 Adjust options in the default config file `config/config.yaml` (see [config/README.md](config/README.md)).
 Before running the complete workflow, you can perform a dry run using:
@@ -48,6 +48,8 @@ Before running the complete workflow, you can perform a dry run using:
 ```bash
 snakemake --dry-run
 ```
+
+**Running the workflow**:
 
 To run the workflow using **conda**:
 
