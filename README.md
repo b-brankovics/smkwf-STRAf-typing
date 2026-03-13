@@ -64,6 +64,6 @@ snakemake --cores 2 --sdm conda apptainer --directory .test
 - [ ] Update the `README.md` badges. Add or remove badges for `conda`/`singularity`/`apptainer` usage depending on the workflow's [deployment](#deployment-options) options.
 - [ ] Do not forget to also adjust the configuration-specific `config/README.md` file.
 - [x] Add STR calculation step to get repeats
-- [ ] Add overview for results
+- [x] Add overview for results
 - [ ] Add check for irregularities (multiple values for a locus, unexpected values)
 - [ ] Add scheme check for STR.tsv, primers.tsv and primers.yaml
