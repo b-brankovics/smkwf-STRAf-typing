@@ -1,13 +1,9 @@
 ## Workflow overview
 
-This workflow is a best-practice workflow for `<detailed description>`.
+This workflow extracts PCR amplicon regions from genomes, and then can process them for STR typing.
 The workflow is built using [snakemake](https://snakemake.readthedocs.io/en/stable/) and consists of the following steps:
 
-1. Download genome reference from NCBI
-2. Validate downloaded genome (`python` script)
-3. Simulate short read sequencing data on the fly (`dwgsim`)
-4. Check quality of input read data (`FastQC`)
-5. Collect statistics from tool output (`MultiQC`)
+> Need to update
 
 ## Running the workflow
 
@@ -51,9 +47,7 @@ STR.tsv:
 
 This table lists all parameters that can be used to run the workflow.
 
-| parameter          | type | details                               | default                        |
-| ------------------ | ---- | ------------------------------------- | ------------------------------ |
-| **accessions**    |      |                                       |                                |
-| path               | str  | path to sample sheet of accessions, mandatory        | "config/accessions.tsv"           |
-| **local_samples**     |      |                                       |                                |
-| path           | str  | path to sample sheet of local assemblies, mandatory | "config/local.tsv" |
+| parameter             | type | details                                             | default                 |
+| --------------------- | ---- | --------------------------------------------------- | ----------------------- |
+| **accessions**        | path | path to sample sheet of accessions, mandatory       | "config/accessions.tsv" |
+| **local_samples**     | path | path to sample sheet of local assemblies, mandatory | "config/local.tsv"      |
