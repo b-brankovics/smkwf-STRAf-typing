@@ -15,8 +15,9 @@ configfile: "config/config.yaml"
 
 # load rules
 # -----------------------------------------------------
-# include: "rules/common.smk"
+include: "rules/common.smk"
 # include: "rules/process_reads.smk"
+
 
 # declare https://github.com/b-brankovics/smkwf-oligo-screening as a module
 module smkwf_oligo_screening:
@@ -27,8 +28,18 @@ module smkwf_oligo_screening:
 
 
 # use all rules from https://github.com/b-brankovics/smkwf-oligo-screening
-use rule * from smkwf_oligo_screening exclude all
+use rule * from smkwf_oligo_screening exclude all, extract_amplicon_seqs, lastal_nucl_x_nucl
 
+# Modify input for rules that use input functions
+use rule extract_amplicon_seqs from smkwf_oligo_screening as extract_amplicon_seqs with:
+    input:
+        tsv="results/{sample}/result.tsv",
+        fas=get_genome_fas,
+
+use rule lastal_nucl_x_nucl from smkwf_oligo_screening as lastal_nucl_x_nucl with:
+    input:
+        data=get_genome_fas,
+        lastdb="resources/lastaldb.prj"
 
 # Add STR typing specific rules
 rule str_typing:
@@ -47,7 +58,7 @@ rule str_typing:
 
 rule str_overview:
     input:
-        counts=expand("results/{sample}/str_repeats.tsv", sample=config["samples"])
+        counts=expand("results/{sample}/str_repeats.tsv", sample=samples)
     output:
         "results/str_overview.tsv",
         "results/str_multi.tsv"
@@ -76,7 +87,8 @@ onerror:
 # -----------------------------------------------------
 rule all:
     input:
-        expand("results/{sample}/result.tsv", sample=config["samples"]),
-        expand("results/{sample}/amplicons.fas", sample=config["samples"]),
-        "results/str_overview.tsv"
+        expand("results/{sample}/result.tsv", sample=samples),
+        expand("results/{sample}/amplicons.fas", sample=samples),
+        "results/str_overview.tsv",
+        "results/str_multi.tsv",
     default_target: True
