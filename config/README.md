@@ -10,7 +10,7 @@ The workflow is built using [snakemake](https://snakemake.readthedocs.io/en/stab
 ### Input data
 
 This workflow extracts PCR amplicon regions from genomes, and then can process them for STR typing.
-You need to specify three tables (TSVs) as inputs:
+You need to specify four tables (TSVs) and a yaml file (primers.yaml) as inputs:
 
 accessions.tsv:
 
@@ -42,6 +42,30 @@ STR.tsv:
 | STRAf-4A | 145          | 4          | TTCT       |
 | STRAf-4B | 145          | 4          | CTAT       |
 | STRAf-4C | 141          | 4          | ATGT       |
+
+primers.tsv:
+
+| Locus    | Description             | Name      | Sequence              | OligoType | Reference                           |
+| -------- | ----------------------- | --------- | --------------------- | --------- | ----------------------------------- |
+| STRAf-2A | Microsatellite locus 2A | STRAf-2AF | AAGGGTTATGGCCATTAGGG  | F         | DOI:10.1128/jcm.43.8.4112-4120.2005 |
+| STRAf-2A | Microsatellite locus 2A | STRAf-2AR | GACCTCCAGGCAAAATGAGA  | R         | DOI:10.1128/jcm.43.8.4112-4120.2005 |
+| STRAf-2B | Microsatellite locus 2B | STRAf-2BF | TATTGGATCTGCTCCCAAGC  | F         | DOI:10.1128/jcm.43.8.4112-4120.2005 |
+| STRAf-2B | Microsatellite locus 2B | STRAf-2BR | GAGATCATGCCCAAGGATGT  | R         | DOI:10.1128/jcm.43.8.4112-4120.2005 |
+| STRAf-2C | Microsatellite locus 2C | STRAf-2CF | TCGGAGTAGTTGCAGGAAGG  | F         | DOI:10.1128/jcm.43.8.4112-4120.2005 |
+| STRAf-2C | Microsatellite locus 2C | STRAf-2CR | AACGCGTCCTAGAATGTTGC  | R         | DOI:10.1128/jcm.43.8.4112-4120.2005 |
+| STRAf-3A | Microsatellite locus 3A | STRAf-3AF | GCTTCGTAGAGCGGAATCAC  | F         | DOI:10.1128/jcm.43.8.4112-4120.2005 |
+| STRAf-3A | Microsatellite locus 3A | STRAf-3AR | GTACCGCTGCAAAGGACAGT  | R         | DOI:10.1128/jcm.43.8.4112-4120.2005 |
+| STRAf-3B | Microsatellite locus 3B | STRAf-3BF | CAACTTGGTGTCAGCGAAGA  | F         | DOI:10.1128/jcm.43.8.4112-4120.2005 |
+| STRAf-3B | Microsatellite locus 3B | STRAf-3BR | GAGGTACCACAACACAGCACA | R         | DOI:10.1128/jcm.43.8.4112-4120.2005 |
+| STRAf-3C | Microsatellite locus 3C | STRAf-3CF | GGTTACATGGCTTGGAGCAT  | F         | DOI:10.1128/jcm.43.8.4112-4120.2005 |
+| STRAf-3C | Microsatellite locus 3C | STRAf-3CR | GTACACAAAGGGTGGGATGG  | R         | DOI:10.1128/jcm.43.8.4112-4120.2005 |
+| STRAf-4A | Microsatellite locus 4A | STRAf-4AF | TTGTTGGCCGCTTTTACTTC  | F         | DOI:10.1128/jcm.43.8.4112-4120.2005 |
+| STRAf-4A | Microsatellite locus 4A | STRAf-4AR | GACCCAGCGCCTATAAATCA  | R         | DOI:10.1128/jcm.43.8.4112-4120.2005 |
+| STRAf-4B | Microsatellite locus 4B | STRAf-4BF | CGTAGTGACCTGAGCCTTCA  | F         | DOI:10.1128/jcm.43.8.4112-4120.2005 |
+| STRAf-4B | Microsatellite locus 4B | STRAf-4BR | GGAAGGCTGTACCGTCAATCT | R         | DOI:10.1128/jcm.43.8.4112-4120.2005 |
+| STRAf-4C | Microsatellite locus 4C | STRAf-4CF | CATATTGGGAAACCCACTCG  | F         | DOI:10.1128/jcm.43.8.4112-4120.2005 |
+| STRAf-4C | Microsatellite locus 4C | STRAf-4CR | ACCAACCCATCCAATTCGTAA | R         | DOI:10.1128/jcm.43.8.4112-4120.2005 |
+
 
 ### Parameters
 
