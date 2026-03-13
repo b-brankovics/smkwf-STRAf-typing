@@ -23,31 +23,39 @@ If you use this workflow in a paper, don't forget to give credits to the authors
 
 ## Deployment options
 
-To run the workflow from command line, change the working directory.
+Prerequisites:
+
+Snakemake needs to be installed and you need to be able to create conda environments.
+You can do this in the following way if you have conda available:
 
 ```bash
-cd path/to/snakemake-workflow-name
+conda create -n snakemake bioconda::snakemake
+conda activate snakemake
 ```
 
-Adjust options in the default config file `config/config.yaml`.
+Download the workflow from github
+
+```bash
+git clone git@github.com:b-brankovics/smkwf-STRAf-typing.git
+cd smkwf-STRAf-typing
+```
+
+Setup your run:
+
+Adjust options in the default config file `config/config.yaml` (see [config/README.md](config/README.md)).
 Before running the complete workflow, you can perform a dry run using:
 
 ```bash
 snakemake --dry-run
 ```
 
-To run the workflow with test files using **conda**:
+To run the workflow using **conda**:
 
 ```bash
-snakemake --cores 2 --sdm conda --directory .test
+snakemake --cores 8 --sdm conda
 ```
 
-To run the workflow with **apptainer** / **singularity**, add a link to a container registry in the `Snakefile`, for example `container: "oras://ghcr.io/<user>/<repository>:<version>"` for Github's container registry.
-Run the workflow with:
-
-```bash
-snakemake --cores 2 --sdm conda apptainer --directory .test
-```
+> The default setting for the workflow is to use conda, use 8 cores and print shell commands (see [profiles/default/config.yaml](profiles/default/config.yaml)).
 
 ## Authors
 
