@@ -22,7 +22,7 @@ include: "rules/common.smk"
 # declare https://github.com/b-brankovics/smkwf-oligo-screening as a module
 module smkwf_oligo_screening:
     snakefile: 
-        github("b-brankovics/smkwf-oligo-screening", path="workflow/Snakefile", branch="setup")
+        github("b-brankovics/smkwf-oligo-screening", path="workflow/Snakefile", branch="feat_make_deployable")
     config:
         config
 
@@ -33,8 +33,8 @@ use rule * from smkwf_oligo_screening exclude all, extract_amplicon_seqs, lastal
 # Modify input for rules that use input functions
 use rule extract_amplicon_seqs from smkwf_oligo_screening as extract_amplicon_seqs with:
     input:
-        tsv="results/{sample}/result.tsv",
-        fas=get_genome_fas,
+        get_genome_fas,
+        regions="results/{sample}/regions",
 
 use rule lastal_nucl_x_nucl from smkwf_oligo_screening as lastal_nucl_x_nucl with:
     input:
