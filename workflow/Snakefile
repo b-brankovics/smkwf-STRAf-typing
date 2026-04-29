@@ -13,15 +13,14 @@ min_version("6.10.0")
 configfile: "config/config.yaml"
 
 
-# load rules
-# -----------------------------------------------------
-# include: "rules/process_reads.smk"
-
-
 # declare https://github.com/b-brankovics/smkwf-oligo-screening as a module
 module smkwf_oligo_screening:
-    snakefile: 
-        github("b-brankovics/smkwf-oligo-screening", path="workflow/Snakefile", branch="feat_make_deployable")
+    snakefile:
+        github(
+            "b-brankovics/smkwf-oligo-screening",
+            path="workflow/Snakefile",
+            branch="feat_make_deployable",
+        )
     config:
         config
 
@@ -34,27 +33,23 @@ use rule * from smkwf_oligo_screening exclude all
 rule str_typing:
     input:
         tsv="results/{sample}/result.tsv",
-        STR="config/STR.tsv"
+        STR="config/STR.tsv",
     output:
-        "results/{sample}/str_repeats.tsv"
-    # conda:
-    #     "envs/primers.yml"
+        "results/{sample}/str_repeats.tsv",
     log:
-        "logs/str_typing/{sample}.log"
+        "logs/str_typing/{sample}.log",
     script:
         "scripts/str_count.py"
 
 
 rule str_overview:
     input:
-        counts=expand("results/{sample}/str_repeats.tsv", sample=samples)
+        counts=expand("results/{sample}/str_repeats.tsv", sample=samples),
     output:
         "results/str_overview.tsv",
-        "results/str_multi.tsv"
-    # conda:
-    #     "envs/primers.yml"
+        "results/str_multi.tsv",
     log:
-        "logs/str_overview.log"
+        "logs/str_overview.log",
     script:
         "scripts/str_overview.py"
 
@@ -76,10 +71,9 @@ onerror:
 # target rules
 # -----------------------------------------------------
 rule all:
+    default_target: True
     input:
         expand("results/{sample}/result.tsv", sample=samples),
         expand("results/{sample}/amplicons.fas", sample=samples),
         "results/str_overview.tsv",
         "results/str_multi.tsv",
-    default_target: True
-
