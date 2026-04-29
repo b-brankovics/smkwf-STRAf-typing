@@ -28,18 +28,8 @@ module smkwf_oligo_screening:
 
 
 # use all rules from https://github.com/b-brankovics/smkwf-oligo-screening
-use rule * from smkwf_oligo_screening exclude all, extract_amplicon_seqs, lastal_nucl_x_nucl
+use rule * from smkwf_oligo_screening exclude all
 
-# Modify input for rules that use input functions
-use rule extract_amplicon_seqs from smkwf_oligo_screening as extract_amplicon_seqs with:
-    input:
-        get_genome_fas,
-        regions="results/{sample}/regions",
-
-use rule lastal_nucl_x_nucl from smkwf_oligo_screening as lastal_nucl_x_nucl with:
-    input:
-        data=get_genome_fas,
-        lastdb="resources/lastaldb.prj"
 
 # Add STR typing specific rules
 rule str_typing:
@@ -69,6 +59,7 @@ rule str_overview:
     script:
         "scripts/str_overview.py"
 
+
 # optional messages, log and error handling
 # -----------------------------------------------------
 onstart:
@@ -92,3 +83,4 @@ rule all:
         "results/str_overview.tsv",
         "results/str_multi.tsv",
     default_target: True
+
