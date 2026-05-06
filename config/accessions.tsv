@@ -7,3 +7,5 @@ W72310	GCA_040167795.1	Clade 3 (basal)
 ATCC46645	GCA_040142955.1	Clade 2/A
 Afir974	GCA_028752175.1	STR 3A-4C publushed (DOI:10.1128/jcm.00335-12)
 NRRL5109	GCA_003116565.1	NRRL:5109=CBS:487.65 that was used as reference for STRAf paper (DOI:10.1128/JCM.43.8.4112-4120.2005)
+F2	GCA_051942955.1	Negative control that has no STRAf amplicons
+SCHI0081.S.1	GCA_044589545.1	Sample with multiple amplicons for STRAf-3C
