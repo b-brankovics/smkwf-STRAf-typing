@@ -4,7 +4,7 @@ import logging
 
 logger = logging.getLogger("SimpleLogger")
 
-#sys.stderr = open(snakemake.log[0], "w", buffering=1)
+# sys.stderr = open(snakemake.log[0], "w", buffering=1)
 file_handler = logging.FileHandler(snakemake.log[0])
 logger.addHandler(file_handler)
 logger.setLevel(logging.WARNING)
@@ -25,14 +25,16 @@ df.set_index("sample", inplace=True)
 # summary = df.pivot_table(values='count', index=df.index, columns='locus', aggfunc=lambda x: pd.unique(x).tolist())
 
 # Check the number of repeat counts per locus and sample
-count = df.pivot_table(values='count', index=df.index, columns='locus', aggfunc="count")
+count = df.pivot_table(values="count", index=df.index, columns="locus", aggfunc="count")
 # row-wise max
 row_max = count.max(axis=1)
 multi = count.index[row_max > 1].tolist()
 single = count.index[row_max <= 1].tolist()
 
 # Separate samples with max 1 count per locus for ones with multiple
-summary = df.pivot_table(values='count', index=df.index, columns='locus', aggfunc="first")
+summary = df.pivot_table(
+    values="count", index=df.index, columns="locus", aggfunc="first"
+)
 
 # Catch samples with no count data
 samples_with_data = set(summary.index.to_list())
@@ -46,11 +48,16 @@ for sample in missing:
 
 single_df = summary.loc[single]
 single_df = pd.concat([single_df, empty_rows])
-single_df.to_csv(snakemake.output[0], sep="\t", index=True, na_rep='NA')
+single_df.to_csv(snakemake.output[0], sep="\t", index=True, na_rep="NA")
 
-listed = df.pivot_table(values='count', index=df.index, columns='locus', aggfunc=lambda x: pd.unique(x).tolist())
+listed = df.pivot_table(
+    values="count",
+    index=df.index,
+    columns="locus",
+    aggfunc=lambda x: pd.unique(x).tolist(),
+)
 multi_df = listed.loc[multi]
-multi_df.to_csv(snakemake.output[1], sep="\t", index=True, na_rep='NA')
+multi_df.to_csv(snakemake.output[1], sep="\t", index=True, na_rep="NA")
 
 # with open(snakemake.output[0], mode="w") as out:
 #     out.write("\t".join(["sample", "locus", "count"+ "\n"]))
