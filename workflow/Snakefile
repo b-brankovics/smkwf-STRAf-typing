@@ -48,8 +48,8 @@ rule str_typing:
         STR="config/STR.tsv"
     output:
         "results/{sample}/str_repeats.tsv"
-    # conda:
-    #     "envs/primers.yml"
+    conda:
+        "envs/pandas.yml"
     log:
         "logs/str_typing/{sample}.log"
     script:
@@ -62,8 +62,8 @@ rule str_overview:
     output:
         "results/str_overview.tsv",
         "results/str_multi.tsv"
-    # conda:
-    #     "envs/primers.yml"
+    conda:
+        "envs/pandas.yml"
     log:
         "logs/str_overview.log"
     script:
