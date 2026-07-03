@@ -16,13 +16,19 @@ configfile: "config/config.yaml"
 # load rules
 # -----------------------------------------------------
 include: "rules/common.smk"
+
+
 # include: "rules/process_reads.smk"
 
 
 # declare https://github.com/b-brankovics/smkwf-oligo-screening as a module
 module smkwf_oligo_screening:
-    snakefile: 
-        github("b-brankovics/smkwf-oligo-screening", path="workflow/Snakefile", branch="setup")
+    snakefile:
+        github(
+            "b-brankovics/smkwf-oligo-screening",
+            path="workflow/Snakefile",
+            branch="setup",
+        )
     config:
         config
 
@@ -30,44 +36,48 @@ module smkwf_oligo_screening:
 # use all rules from https://github.com/b-brankovics/smkwf-oligo-screening
 use rule * from smkwf_oligo_screening exclude all, extract_amplicon_seqs, lastal_nucl_x_nucl
 
+
 # Modify input for rules that use input functions
 use rule extract_amplicon_seqs from smkwf_oligo_screening as extract_amplicon_seqs with:
     input:
         tsv="results/{sample}/result.tsv",
         fas=get_genome_fas,
 
+
 use rule lastal_nucl_x_nucl from smkwf_oligo_screening as lastal_nucl_x_nucl with:
     input:
         data=get_genome_fas,
-        lastdb="resources/lastaldb.prj"
+        lastdb="resources/lastaldb.prj",
+
 
 # Add STR typing specific rules
 rule str_typing:
     input:
         tsv="results/{sample}/result.tsv",
-        STR="config/STR.tsv"
+        STR="config/STR.tsv",
     output:
-        "results/{sample}/str_repeats.tsv"
+        "results/{sample}/str_repeats.tsv",
     conda:
-        "envs/pandas.yml"
+        "envs/pandas.yaml"
     log:
-        "logs/str_typing/{sample}.log"
+        "logs/str_typing/{sample}.log",
     script:
         "scripts/str_count.py"
 
 
 rule str_overview:
     input:
-        counts=expand("results/{sample}/str_repeats.tsv", sample=samples)
+        counts=expand("results/{sample}/str_repeats.tsv", sample=samples),
     output:
         "results/str_overview.tsv",
-        "results/str_multi.tsv"
+        "results/str_multi.tsv",
     conda:
-        "envs/pandas.yml"
+        "envs/pandas.yaml"
     log:
-        "logs/str_overview.log"
+        "logs/str_overview.log",
     script:
         "scripts/str_overview.py"
+
 
 # optional messages, log and error handling
 # -----------------------------------------------------
