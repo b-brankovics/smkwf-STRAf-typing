@@ -34,20 +34,7 @@ module smkwf_oligo_screening:
 
 
 # use all rules from https://github.com/b-brankovics/smkwf-oligo-screening
-use rule * from smkwf_oligo_screening exclude all, extract_amplicon_seqs, lastal_nucl_x_nucl
-
-
-# Modify input for rules that use input functions
-use rule extract_amplicon_seqs from smkwf_oligo_screening as extract_amplicon_seqs with:
-    input:
-        tsv="results/{sample}/result.tsv",
-        fas=get_genome_fas,
-
-
-use rule lastal_nucl_x_nucl from smkwf_oligo_screening as lastal_nucl_x_nucl with:
-    input:
-        data=get_genome_fas,
-        lastdb="resources/lastaldb.prj",
+use rule * from smkwf_oligo_screening exclude all
 
 
 # Add STR typing specific rules
@@ -57,10 +44,10 @@ rule str_typing:
         STR="config/STR.tsv",
     output:
         "results/{sample}/str_repeats.tsv",
-    conda:
-        "envs/pandas.yaml"
     log:
         "logs/str_typing/{sample}.log",
+    conda:
+        "envs/pandas.yaml"
     script:
         "scripts/str_count.py"
 
@@ -71,10 +58,10 @@ rule str_overview:
     output:
         "results/str_overview.tsv",
         "results/str_multi.tsv",
-    conda:
-        "envs/pandas.yaml"
     log:
         "logs/str_overview.log",
+    conda:
+        "envs/pandas.yaml"
     script:
         "scripts/str_overview.py"
 
@@ -96,9 +83,9 @@ onerror:
 # target rules
 # -----------------------------------------------------
 rule all:
+    default_target: True
     input:
         expand("results/{sample}/result.tsv", sample=samples),
         expand("results/{sample}/amplicons.fas", sample=samples),
         "results/str_overview.tsv",
         "results/str_multi.tsv",
-    default_target: True

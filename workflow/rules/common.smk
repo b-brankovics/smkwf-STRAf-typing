@@ -2,7 +2,6 @@
 import pandas as pd
 from snakemake.utils import validate
 
-
 # read sample sheet
 local_samples = (
     pd.read_csv(config["local_samples"], sep="\t", dtype={"sample": str})
