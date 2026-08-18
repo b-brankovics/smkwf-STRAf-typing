@@ -71,9 +71,9 @@ snakemake --cores 8 --sdm conda
 - [x] Replace `<name>` with the workflow name (can be the same as `<repo>`).
 - [x] Replace `<description>` with a description of what the workflow does.
 - [ ] Update the [deployment](#deployment-options), [authors](#authors) and [references](#references) sections.
-- [ ] Update the `README.md` badges. Add or remove badges for `conda`/`singularity`/`apptainer` usage depending on the workflow's [deployment](#deployment-options) options.
+- [x] Update the `README.md` badges. Add or remove badges for `conda`/`singularity`/`apptainer` usage depending on the workflow's [deployment](#deployment-options) options.
 - [ ] Do not forget to also adjust the configuration-specific `config/README.md` file.
 - [x] Add STR calculation step to get repeats
 - [x] Add overview for results
-- [ ] Add check for irregularities (multiple values for a locus, unexpected values)
+- [x] Add check for irregularities (multiple values for a locus, unexpected values)
 - [ ] Add scheme check for STR.tsv, primers.tsv and primers.yaml
