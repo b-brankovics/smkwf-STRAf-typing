@@ -21,12 +21,24 @@ res_df = res_df[res_df["amplicon size"] < 1000]
 
 # Process each locus
 with open(snakemake.output[0], mode="w") as out:
-    out.write("\t".join(["sample", "locus", "count"+ "\n"]))
+    out.write("\t".join(["sample", "locus", "count" + "\n"]))
     for index, row in str_df.iterrows():
         # Get PCR test values for the locus to calculate or print NA
-        select = res_df.loc[res_df['test'] == row["locus"]]
+        select = res_df.loc[res_df["test"] == row["locus"]]
         if select.shape[0]:
             for index, res_row in select.iterrows():
-                out.write("\t".join([sample, row["locus"], str((res_row["amplicon size"] - row["flanking_len"]) / row["repeat_len"]) + "\n"]))
+                out.write(
+                    "\t".join(
+                        [
+                            sample,
+                            row["locus"],
+                            str(
+                                (res_row["amplicon size"] - row["flanking_len"])
+                                / row["repeat_len"]
+                            )
+                            + "\n",
+                        ]
+                    )
+                )
         else:
             out.write("\t".join([sample, row["locus"], "NA\n"]))

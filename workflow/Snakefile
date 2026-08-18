@@ -27,7 +27,7 @@ module smkwf_oligo_screening:
         github(
             "b-brankovics/smkwf-oligo-screening",
             path="workflow/Snakefile",
-            branch="setup",
+            branch="main",
         )
     config:
         config

@@ -1,5 +1,11 @@
-sample	assembly
-Af293	GCF_000002655.1
-A1160	GCA_024220425.1
-W72310	GCA_040167795.1
-ATCC46645	GCA_040142955.1
+sample	assembly	descriptions
+Af293	GCF_000002655.1	Reference genome
+A1163	GCA_000150145.1	Alternative reference genome (wildtype cyp51A)
+Z5	GCA_001029325.1	Ensembl: https://fungi.ensembl.org/Aspergillus_fumigatus_z5_gca_001029325/Info/Index
+AspFumNiv1.0	GCA_000731615.1	Ensembl: https://fungi.ensembl.org/Aspergillus_fumigatus_z5_gca_001029325/Info/Index
+W72310	GCA_040167795.1	Clade 3 (basal)
+ATCC46645	GCA_040142955.1	Clade 2/A
+Afir974	GCA_028752175.1	STR 3A-4C publushed (DOI:10.1128/jcm.00335-12)
+NRRL5109	GCA_003116565.1	NRRL:5109=CBS:487.65 that was used as reference for STRAf paper (DOI:10.1128/JCM.43.8.4112-4120.2005)
+F2	GCA_051942955.1	Negative control that has no STRAf amplicons
+SCHI0081.S.1	GCA_044589545.1	Sample with multiple amplicons for STRAf-3C
