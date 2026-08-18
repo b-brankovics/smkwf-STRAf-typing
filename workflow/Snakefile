@@ -27,7 +27,7 @@ module smkwf_oligo_screening:
         github(
             "b-brankovics/smkwf-oligo-screening",
             path="workflow/Snakefile",
-            branch="feat_make_deployable",
+            branch="main",
         )
     config:
         config
@@ -46,6 +46,8 @@ rule str_typing:
         "results/{sample}/str_repeats.tsv",
     log:
         "logs/str_typing/{sample}.log",
+    conda:
+        "envs/pandas.yaml"
     script:
         "scripts/str_count.py"
 
@@ -58,6 +60,8 @@ rule str_overview:
         "results/str_multi.tsv",
     log:
         "logs/str_overview.log",
+    conda:
+        "envs/pandas.yaml"
     script:
         "scripts/str_overview.py"
 
