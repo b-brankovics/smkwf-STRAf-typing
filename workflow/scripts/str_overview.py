@@ -19,6 +19,9 @@ results_files = snakemake.input["counts"]
 # load tables
 df = pd.concat((pd.read_csv(f, sep="\t") for f in results_files), ignore_index=True)
 df.set_index("sample", inplace=True)
+
+df = df.astype(str)
+df = df.replace(to_replace = "\.0+$",value = "", regex = True)
 # str_df = pd.read_csv(str_file, sep="\t")
 
 # list multiple options
@@ -48,6 +51,8 @@ for sample in missing:
 
 single_df = summary.loc[single]
 single_df = pd.concat([single_df, empty_rows])
+single_df = single_df.astype(str)
+single_df = single_df.replace(to_replace = "\.0+$",value = "", regex = True)
 single_df.to_csv(snakemake.output[0], sep="\t", index=True, na_rep="NA")
 
 listed = df.pivot_table(

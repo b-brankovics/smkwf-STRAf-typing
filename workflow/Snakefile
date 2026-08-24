@@ -52,14 +52,48 @@ rule str_typing:
         "scripts/str_count.py"
 
 
+rule str_typing2:
+    input:
+        "results/{sample}/amplicons.fas",
+        "config/STR.tsv",
+    output:
+        "results/screening/{sample}/str.tsv",
+    log:
+        "logs/str_typing2/{sample}.log",
+    conda:
+        "envs/perl.yaml"
+    params:
+        opts=lambda wildcards: [wildcards.sample],
+    # shell:
+    #     """
+    #     perl workflow/scripts/screen.pl {input} {params.opts} > {output} 2> {log}
+    #     """
+    script:
+        "scripts/screen.sh"
+
+
 rule str_overview:
     input:
         counts=expand("results/{sample}/str_repeats.tsv", sample=samples),
     output:
-        "results/str_overview.tsv",
-        "results/str_multi.tsv",
+        "results/naive/str_overview.tsv",
+        "results/naive/str_multi.tsv",
     log:
         "logs/str_overview.log",
+    conda:
+        "envs/pandas.yaml"
+    script:
+        "scripts/str_overview.py"
+
+
+rule str_overview2:
+    input:
+        counts=expand("results/screening/{sample}/str.tsv", sample=samples),
+    output:
+        "results/report/str_overview.tsv",
+        "results/report/str_multi.tsv",
+    log:
+        "logs/report/str_overview.log",
     conda:
         "envs/pandas.yaml"
     script:
@@ -87,5 +121,7 @@ rule all:
     input:
         expand("results/{sample}/result.tsv", sample=samples),
         expand("results/{sample}/amplicons.fas", sample=samples),
-        "results/str_overview.tsv",
-        "results/str_multi.tsv",
+        "results/naive/str_overview.tsv",
+        "results/naive/str_multi.tsv",
+        "results/report/str_overview.tsv",
+        "results/report/str_multi.tsv",
