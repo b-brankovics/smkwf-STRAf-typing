@@ -68,7 +68,7 @@ sub screen {
 
         my ( $pre, $target, $post );
         for my $regex ( $regex0, $regex, $regex2, $regex3 ) {
-            if ( $fas_data{$_} =~ /$regex/ && length $2 > $target ) {
+            if ( $fas_data{$_} =~ /$regex/ && length $2 > length $target ) {
                 ( $pre, $target, $post ) = ( $1, $2, $3 );
             }
         }
