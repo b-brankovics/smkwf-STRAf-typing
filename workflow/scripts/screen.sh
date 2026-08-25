@@ -45,7 +45,6 @@ sub screen {
     # so we allow for 1 imperfect repeat at positions 2 or 3 from the end.
     my $regex0 = "^" . "(.*?)"
       . "((?:${repeat}){1,}.{$n}(?:${repeat}){1,})"
-      # . "((?:${repeat})+(?:.{$n})?(?:${repeat})+)"    # This maybe too short
       . "(.*?)" . '$';
     my $regex = "^" . "(.*?)"
       . "((?:${repeat}){1,2}.{$n}(?:${repeat}){2,}.{$n}(?:${repeat}){1,2})"
@@ -102,7 +101,7 @@ sub screen {
         }
     }
     unless ($hit) {
-        print join( "\t", $sample, $locus, "NA", "NA", "NA", "NA", "NA" )
+        print join( "\t", $sample, $locus, "NA", "NA", "NA", "NA", "NA", "NA", "NA" )
           . "\n";
     }
 }
