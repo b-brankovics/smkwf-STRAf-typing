@@ -42,7 +42,7 @@ sub screen {
     # There can be imperfect repeats near the ends of the repeat region,
     # so we allow for 1 imperfect repeat at positions 2 or 3 from the end.
     my $regex0 = "^" . "(.*?)"
-      . "(?:${repeat})+(?:.{$n})?(?:${repeat})+"    # This maybe too short
+      . "((?:${repeat})+(?:.{$n})?(?:${repeat})+)"    # This maybe too short
       . "(.*?)" . '$';
     my $regex = "^" . "(.*?)"
       . "((?:${repeat}){1,2}.{$n}(?:${repeat}){2,}.{$n}(?:${repeat}){1,2})"
