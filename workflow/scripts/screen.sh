@@ -25,8 +25,9 @@ my @ids;
 &read_fasta( \%fas_data, \@ids, $fasta );
 
 print join( "\t",
-    "sample",     "locus",      "count", "upstream",
-    "downstream", "Repeat_seq", "Bad_repeat" )
+    "sample",     "locus",        "count",
+    "upstream",   "downstream",   "Repeat_seq",
+    "Bad_repeat", "upstream_seq", "downstream_seq" )
   . "\n";
 for my $locus ( sort keys %loci ) {
     my $repeat = $loci{$locus};
@@ -42,6 +43,9 @@ sub screen {
 
     # There can be imperfect repeats near the ends of the repeat region,
     # so we allow for 1 imperfect repeat at positions 2 or 3 from the end.
+    my $regex0 = "^" . "(.*?)"
+      . "(?:${repeat})+(?:.{$n})?(?:${repeat})+"    # This maybe too short
+      . "(.*?)" . '$';
     my $regex = "^" . "(.*?)"
       . "((?:${repeat}){1,2}.{$n}(?:${repeat}){2,}.{$n}(?:${repeat}){1,2})"
       . "(.*?)" . '$';
@@ -63,19 +67,13 @@ sub screen {
         $fas_data{$_} = uc $fas_data{$_};
 
         my ( $pre, $target, $post );
-        if ( $fas_data{$_} =~ /$regex/ ) {
-            $hit++;
-            ( $pre, $target, $post ) = ( $1, $2, $3 );
-        }
-        elsif ( $fas_data{$_} =~ /$regex2/ ) {
-            $hit++;
-            ( $pre, $target, $post ) = ( $1, $2, $3 );
-        }
-        elsif ( $fas_data{$_} =~ /$regex3/ ) {
-            $hit++;
-            ( $pre, $target, $post ) = ( $1, $2, $3 );
+        for my $regex ( $regex0, $regex, $regex2, $regex3 ) {
+            if ( $fas_data{$_} =~ /$regex/ && length $2 > $target ) {
+                ( $pre, $target, $post ) = ( $1, $2, $3 );
+            }
         }
         if ($target) {
+            $hit++;
             my @rep   = ( $target =~ m/.{$n}/g );
             my $count = scalar @rep;
             my @bad;
@@ -98,7 +96,7 @@ sub screen {
 # print join("\t", "sample", "locus", "count", "upstream", "downstream", "Repeat_seq", "Bad_repeat"). "\n";
             print join( "\t",
                 $sample, $locus, $count, ( map { length $_ } ( $pre, $post ) ),
-                $target, $note )
+                $target, $note,  $pre, $post )
               . "\n";
         }
     }
