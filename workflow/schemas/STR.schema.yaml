@@ -1,0 +1,21 @@
+$schema: "https://json-schema.org/draft/2020-12/schema"
+description: entries for the primers sample sheet
+properties:
+  locus:
+    type: string
+    description: Locus name for the STR
+  flanking_len:
+    type: integer
+    description: Length of the flanking sequence
+  repeat_len:
+    type: integer
+    description: Length of the repeated sequence
+  repeat_seq:
+    type: string
+    description: Sequence of the repeate
+
+required:
+  - locus
+  - flanking_len
+  - repeat_len
+  - repeat_seq

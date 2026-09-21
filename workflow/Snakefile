@@ -40,10 +40,10 @@ use rule * from smkwf_oligo_screening exclude all
 # Add STR typing specific rules
 rule str_typing:
     input:
-        tsv="results/{sample}/result.tsv",
+        tsv="results/amplicon/{sample}/result.tsv",
         STR="config/STR.tsv",
     output:
-        "results/{sample}/str_repeats.tsv",
+        "results/str/{sample}/str_repeats.tsv",
     log:
         "logs/str_typing/{sample}.log",
     conda:
@@ -54,7 +54,7 @@ rule str_typing:
 
 rule str_typing2:
     input:
-        "results/{sample}/amplicons.fas",
+        "results/amplicon/{sample}/amplicons.fas",
         "config/STR.tsv",
     output:
         "results/screening/{sample}/str.tsv",
@@ -74,7 +74,7 @@ rule str_typing2:
 
 rule str_overview:
     input:
-        counts=expand("results/{sample}/str_repeats.tsv", sample=samples),
+        counts=expand("results/str/{sample}/str_repeats.tsv", sample=samples),
     output:
         "results/naive/str_overview.tsv",
         "results/naive/str_multi.tsv",
@@ -119,8 +119,8 @@ onerror:
 rule all:
     default_target: True
     input:
-        expand("results/{sample}/result.tsv", sample=samples),
-        expand("results/{sample}/amplicons.fas", sample=samples),
+        expand("results/amplicon/{sample}/result.tsv", sample=samples),
+        expand("results/amplicon/{sample}/amplicons.fas", sample=samples),
         "results/naive/str_overview.tsv",
         "results/naive/str_multi.tsv",
         "results/report/str_overview.tsv",
