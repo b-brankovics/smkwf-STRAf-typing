@@ -2,6 +2,7 @@
 accessions: "config/accessions.tsv"
 local_samples: "config/local.tsv"
 primers: "config/primers.tsv"
+STR: "config/STR.tsv"
 # Amplicon filtering parameters
 filtering:
   min_amplicon_length: 50

@@ -56,6 +56,16 @@ if primers.index.has_duplicates:
     raise ValueError(
         f"Duplicate locus name and oligo type combinations found in primers sheet: {primers.index[primers.index.duplicated()].tolist()}"
     )
+str_data = (
+    pd.read_csv(config["STR"], sep="\t", dtype={"locus": str})
+    .set_index(["locus"], drop=False)
+    .sort_index()
+)
+validate(str_data, schema="../schemas/STR.schema.yaml")
+if str_data.index.has_duplicates:
+    raise ValueError(
+        f"Duplicate locus name STR sheet: {str_data.index[str_data.index.duplicated()].tolist()}"
+    )
 
 
 accessions["assembly_file"] = accessions["sample"].apply(
