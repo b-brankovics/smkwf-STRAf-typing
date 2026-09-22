@@ -1,5 +1,19 @@
 # Changelog
 
+## 1.0.0 (2026-09-22)
+
+
+### Features
+
+* choose longest match and print flanking sequence ([c6e22f5](https://github.com/b-brankovics/smkwf-STRAf-typing/commit/c6e22f552bb383c5398b305c6f7c71143a0cc0f4))
+
+
+### Bug Fixes
+
+* Bug fix for [#1](https://github.com/b-brankovics/smkwf-STRAf-typing/issues/1) in str_overview.py for negative samples ([c6bacf0](https://github.com/b-brankovics/smkwf-STRAf-typing/commit/c6bacf07b6a8ddb50e6e9e7771463902d404710f))
+* Bug fix for [#1](https://github.com/b-brankovics/smkwf-STRAf-typing/issues/1) in str_overview.py for negative samples ([b4fd22a](https://github.com/b-brankovics/smkwf-STRAf-typing/commit/b4fd22a0a0902e3399573358bbacbf9b684163a4))
+* update oligo ([dfdea1b](https://github.com/b-brankovics/smkwf-STRAf-typing/commit/dfdea1b3041ba13dbe96d27f86024ec030da3968))
+
 ## [1.2.0](https://github.com/snakemake-workflows/snakemake-workflow-template/compare/v1.1.0...v1.2.0) (2026-01-20)
 
 
