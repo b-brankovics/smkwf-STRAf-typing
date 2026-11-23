@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.1](https://github.com/b-brankovics/smkwf-STRAf-typing/compare/v1.0.0...v1.0.1) (2026-11-23)
+
+
+### Bug Fixes
+
+* READMEs and updated Snakefile to use config["STR"] instead of "config/STR.tsv" ([085dbeb](https://github.com/b-brankovics/smkwf-STRAf-typing/commit/085dbebbf74b4a7c0c010384a548232d95d520ae))
+
 ## 1.0.0 (2026-09-22)
 
 
