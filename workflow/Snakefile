@@ -41,7 +41,7 @@ use rule * from smkwf_oligo_screening exclude all
 rule str_typing:
     input:
         tsv="results/amplicon/{sample}/result.tsv",
-        STR=config['STR'],
+        STR=config["STR"],
     output:
         "results/str/{sample}/str_repeats.tsv",
     log:
@@ -55,7 +55,7 @@ rule str_typing:
 rule str_typing2:
     input:
         "results/amplicon/{sample}/amplicons.fas",
-        config['STR'],
+        config["STR"],
     output:
         "results/screening/{sample}/str.tsv",
     log:
