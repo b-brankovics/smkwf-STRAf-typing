@@ -3,7 +3,12 @@
 This workflow extracts PCR amplicon regions from genomes, and then can process them for STR typing.
 The workflow is built using [snakemake](https://snakemake.readthedocs.io/en/stable/) and consists of the following steps:
 
-> Need to update
+1. Oligomers (primers and probes) are mapped to the genomes
+2. Correct for IUPAC matching in the alignments
+3. Identify correct amplicon regions
+4. Extract amplicons passing filtering criteria
+5. Process STR amplicons for typing and statistics
+6. Summarize results
 
 ## Running the workflow
 
@@ -71,7 +76,11 @@ primers.tsv:
 
 This table lists all parameters that can be used to run the workflow.
 
-| parameter             | type | details                                             | default                 |
-| --------------------- | ---- | --------------------------------------------------- | ----------------------- |
-| **accessions**        | path | path to sample sheet of accessions, mandatory       | "config/accessions.tsv" |
-| **local_samples**     | path | path to sample sheet of local assemblies, mandatory | "config/local.tsv"      |
+| parameter                | type | details                                             | default                 |
+| ------------------------ | ---- | --------------------------------------------------- | ----------------------- |
+| **accessions**           | path | path to sample sheet of accessions, mandatory       | "config/accessions.tsv" |
+| **local_samples**        | path | path to sample sheet of local assemblies, mandatory | "config/local.tsv"      |
+| **min_amplicon_length**  | int  | minimum length for anlysing amplicon                | 50                      |
+| **max_amplicon_length**  | int  | maximum length for anlysing amplicon                | 5000                    |
+| **max_total_mismatches** | int  | maximum number of missmatches per amplicon          | 5                       |
+| **reject_primer_from**   | int  | minimum number mismatches per oligo that will reject the amplicon | 4         |
