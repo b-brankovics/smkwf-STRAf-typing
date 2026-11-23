@@ -80,6 +80,8 @@ This table lists all parameters that can be used to run the workflow.
 | ------------------------ | ---- | --------------------------------------------------- | ----------------------- |
 | **accessions**           | path | path to sample sheet of accessions, mandatory       | "config/accessions.tsv" |
 | **local_samples**        | path | path to sample sheet of local assemblies, mandatory | "config/local.tsv"      |
+| **primers**              | path | path to primer info sheet, mandatory                | "config/primers.tsv"    |
+| **STR**                  | path | path to STR info sheet, mandatory                   | "config/STR.tsv"        |
 | **min_amplicon_length**  | int  | minimum length for anlysing amplicon                | 50                      |
 | **max_amplicon_length**  | int  | maximum length for anlysing amplicon                | 5000                    |
 | **max_total_mismatches** | int  | maximum number of missmatches per amplicon          | 5                       |
