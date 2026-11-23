@@ -17,7 +17,7 @@ A Snakemake workflow for STRAf typing Aspergillus fumigatus genome
 
 ## Usage
 
-Detailed information about input data and workflow configuration can also be found in the [`config/README.md`](config/README.md).
+Detailed information about input data and workflow configuration can also be in the [`config/README.md`](config/README.md).
 
 If you use this workflow in a paper, don't forget to give credits to the authors by citing the URL of this repository or its DOI.
 
@@ -65,15 +65,3 @@ snakemake --cores 8 --sdm conda
   - [Westerdijk Fungal Biodiversity Institute - KNAW](https://wi.knaw.nl/Balazs_Brankovics)
   - [https://orcid.org/0000-0003-0536-7787](https://orcid.org/0000-0003-0536-7787)
 
-## TODO
-
-- [x] Replace `<owner>` and `<repo>` everywhere in the template with the correct user name/organization, and the repository name. The workflow will be automatically added to the [snakemake workflow catalog](https://snakemake.github.io/snakemake-workflow-catalog/index.html) once it is publicly available on Github.
-- [x] Replace `<name>` with the workflow name (can be the same as `<repo>`).
-- [x] Replace `<description>` with a description of what the workflow does.
-- [ ] Update the [deployment](#deployment-options), [authors](#authors) and [references](#references) sections.
-- [x] Update the `README.md` badges. Add or remove badges for `conda`/`singularity`/`apptainer` usage depending on the workflow's [deployment](#deployment-options) options.
-- [ ] Do not forget to also adjust the configuration-specific `config/README.md` file.
-- [x] Add STR calculation step to get repeats
-- [x] Add overview for results
-- [x] Add check for irregularities (multiple values for a locus, unexpected values)
-- [ ] Add scheme check for STR.tsv, primers.tsv and primers.yaml
